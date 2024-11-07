@@ -1,0 +1,8 @@
+11fe carga en reg. 1 de número en pto. flotante
+2280 patrón 1000|0000 en registro 1 como máscara para obtener signo e invertir signo
+8312 signo del número en reg. 3: 00 positivo o 80 negativo
+2000 patrón de salto por signo positivo en reg. 0
+b30c salto por signo positivo
+9112 inversión de signo del patrón en registro 1 (opuesto del número)
+31ff sale número de registro 1 por puerto de salida
+c000

@@ -1,0 +1,9 @@
+1ffe entra número en c2 a registro f
+2e80 carga de patrón 1000000 en registro e para obtener signo del número
+8dfe si signo del número es positivo, en registro d queda 0, si no, queda 80 (10000000)
+af01 rotación a derecha un bit del número en f
+2c7f carga de patrón 01111111 para anular el bit más significativo
+8ffc bit más significativo del número rotado queda 0
+7ffd si el número era negativo, el bit más significativo queda en 1, si no, queda 0
+3fff sale el número dividido 2
+c000

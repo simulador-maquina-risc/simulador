@@ -1,0 +1,16 @@
+11fe dividendo en reg. 1 (se asume positivo en complemento a 2)
+12fe divisor en reg. 2 (se asume positivo en complemento a 2)
+23ff máscara para invertir bits en reg. 3
+2401 unidad en reg. 4
+9223 inversión de bits de reg. 2 (complemento a 1 del divisor)
+5224 opuesto del divisor en reg. 2
+2500 cociente 0 en reg. 5 (registro 5 es contador de restas)
+2680 máscara para signo en reg. 6
+2080 patrón de salto por signo negativo en reg. 0
+5112 resta al registro 1 del divisor
+8716 signo de número en reg. 1 en reg. 7 (80 negativo, 00 positivo)
+b71c salto a mostrar resultado
+5554 suma de unidad a cociente
+b012 salto incondicional a repetir resta
+35ff reg. 5 a puerto de salida (muestra de resultado)
+c000

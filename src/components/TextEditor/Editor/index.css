@@ -1,0 +1,51 @@
+.monaco-editor .monaco-scrollable-element .scrollbar.horizontal,
+.monaco-editor .decorationsOverviewRuler,
+.monaco-editor
+  .monaco-scrollable-element
+  .scrollbar.vertical
+  .scrollbar.horizontal
+  .arrow-background {
+  background: rgba(180, 180, 180, 0.9);
+}
+.monaco-editor .monaco-scrollable-element .scrollbar.vertical {
+  background: rgba(40, 40, 40, 0.7);
+}
+
+.glyph-margin-color-red {
+  color: var(--im-red);
+}
+
+.glyph-margin-color-green {
+  color: var(--im-green);
+}
+
+.glyph-margin-color-pink {
+  color: var(--im-pink);
+}
+
+.glyph-margin-color-blue {
+  color: var(--im-blue);
+}
+
+.glyph-margin-color-yellow {
+  color: var(--im-yellow);
+}
+
+.glyph-margin {
+  margin-left: 3px;
+}
+.line-error-highlight {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.editor-container {
+  position: relative;
+}
+
+.monaco-placeholder {
+  position: absolute;
+  top: -3px;
+  left: 40px;
+  color: var(--im-gray-lighter);
+  display: inline-block;
+}

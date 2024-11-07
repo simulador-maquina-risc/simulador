@@ -1,0 +1,143 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  line-height: 1.5;
+  font-weight: 400;
+  overflow: hidden;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --im-shadow: rgba(0, 0, 0, 0.25) 10px 20px 100px -20px,
+    rgba(50, 50, 50, 0.596) 0px 30px 60px -30px,
+    rgba(114, 114, 114, 0.37) 0px -3px 10px 0px inset;
+
+  --im-black: #000000;
+  --im-white: #f4f4f4;
+  --im-white-gray: #e7e7e7;
+  --im-darkgray: #272727;
+  --im-gray: #626262;
+  --im-gray-lighter: #848484;
+  --im-lightgray: #c2c2c2;
+  --im-bluegray: #4f5d75;
+  --im-primary: #153a4b;
+  --im-secondary: #023445;
+  --im-terciary: #4a8a9f;
+  --im-light-purple: #6a6792;
+  --im-light-blue: #73989e;
+  --im-terciary: #496675;
+  --im-purple: #29274c;
+  --im-red: rgb(187, 78, 78);
+  --im-pink: rgb(116, 36, 148);
+  --im-green: rgb(40, 95, 40);
+  --im-blue: rgb(29, 64, 139);
+  --im-yellow: rgb(218, 120, 23);
+  --im-lightgreen: #90ee90;
+  --im-teal: #008080;
+  --im-lightblue: #add8e6;
+  --im-address: hsl(178, 100%, 87%);
+  --im-data: hsl(188, 48%, 63%);
+
+  --im-primary-hover: #1a516c;
+  --im-shadow-hover: rgba(101, 101, 101, 0.25) 0px 10px 20px -10px,
+    rgba(128, 128, 128, 0.596) 0px 30px 60px -30px,
+    rgba(83, 83, 83, 0.37) 0px -3px 10px 0px inset;
+}
+
+.color-blind-high-contrast {
+  --im-pink: rgb(219, 39, 119);
+  --im-green: rgb(0, 128, 0);
+  --im-blue: rgb(0, 64, 255);
+  --im-yellow: rgba(255, 166, 0, 10);
+  --im-lightgreen: rgb(0, 255, 0);
+  --im-teal: rgb(0, 200, 200);
+  --im-lightblue: rgb(0, 100, 255);
+}
+
+/* SCROLLBARS */
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #898989;
+}
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+.react-flow__edge {
+  padding: 10px !important;
+  cursor: none;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 1000;
+  }
+}

@@ -1,0 +1,12 @@
+11fe primer número positivo en registro 1
+12fe segundo número positivo, menor o igual al primero, en registro 2
+2300 inicialización en 0 de registro 3 sumador para el producto
+24ff -1 en registro 4 para restárselo sucesivamente al registro 2
+2000 00 en registro 0 para comparar con contenido de registro 2 y salir del ciclo
+b214 si el segundo número es 0 se salta al final
+5331 suma del primer número al registro 3
+5224 suma de -1 al registro 2
+b214 si el segundo número quedó en 0 se salta al final
+b00c salto a seguir sumando
+33ff salida del producto por puerto
+c000 fin

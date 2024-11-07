@@ -1,0 +1,11 @@
+11fe número en complemento a 2 en reg. 1
+2280 máscara para desenmascarar signo en reg. 2
+8312 representación de signo de número en reg. 1 en reg. 3 (00 positivo - 80 negativo)
+2000 patrón de signo positivo en reg. 0
+b312 salto por signo positivo
+24ff máscara para invertir bits con XOR en registro 4
+9114 número en registro 1 con bits invertidos
+2501 unidad en registro 5 para sumar a registro 1
+5115 opuesto de número original en registro 1
+31ff saca contenido de registro 1 por puerto de salida
+c000
