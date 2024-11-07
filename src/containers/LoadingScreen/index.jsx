@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LoadingContainer, Icon, Title, Subtitle, StartButton } from "./styled";
+import favicon from "/favicon.png";
 
 export const LoadingScreen = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +26,7 @@ export const LoadingScreen = () => {
   return (
     <LoadingContainer className={fadeOut ? "fade-out" : ""}>
       {" "}
-      <Icon src="/favicon.png" alt="Cargando..." fadeOut={fadeOut} />
+      <Icon src={favicon} fadeOut={fadeOut} />
       <Title>Intérprete Máquina Ideal RISC</Title>
       <Subtitle>
         Una mirada interactiva a la arquitectura de una computadora en
