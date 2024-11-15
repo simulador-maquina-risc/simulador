@@ -108,3 +108,13 @@ export const StartButton = styled.button`
     box-shadow: var(--im-shadow-hover);
   }
 `;
+
+
+export const Credits = styled.div`
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
+`

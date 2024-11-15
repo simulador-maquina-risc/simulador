@@ -1,6 +1,6 @@
 import { typeSimulations } from "../constants";
 import Instruction from "../Instruction";
-import { animationsAluData, toBinary } from "../utils";
+import { animationsAluData, toBinary, toHexa } from "../utils";
 /*
 
 Instruction: b
@@ -10,7 +10,7 @@ Jumps to the instruction at address XY if the content of register R is equal to 
 export default class Branch extends Instruction {
   constructor(type, instruction, id) {
     super(type, id);
-    this.registerCompareId = instruction[1];
+    this.registerCompareId = parseInt(instruction[1], 16);
     this.nextInstructionDir = instruction[2] + instruction[3];
   }
 
@@ -20,7 +20,6 @@ export default class Branch extends Instruction {
     const { registers } = newExecuteState;
     const register0 = toBinary(registers[0]);
     const registerToCompare = toBinary(registers[this.registerCompareId]);
-
     newExecuteState.aluOperation = {
       operation: "EQUAL",
       registerS: registers[0],
@@ -36,7 +35,7 @@ export default class Branch extends Instruction {
       this.registerCompareId,
       parseInt(registerToCompare, 2).toString(16),
       null,
-      null //register0 == registerToCompare
+      null
     );
 
     if (register0 == registerToCompare) {

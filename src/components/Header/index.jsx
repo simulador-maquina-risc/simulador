@@ -4,8 +4,6 @@ import {
   HeaderSelect,
   HeaderOption,
   HeaderCyclesColorReference,
-  TooltipText,
-  TooltipWrapper,
   CalculatorButton,
 } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,17 +19,13 @@ import {
   executeReference,
   cycleReference,
 } from "./utils";
-import { IconButton, Switch, Tooltip } from "@mui/material";
 import { setOpenCalculatorModal } from "../../slices/modalsSlice";
 import { FaCalculator } from "react-icons/fa";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import Brightness5Icon from "@mui/icons-material/Brightness5";
 
 export const Header = () => {
   const dispatch = useDispatch();
   const [isPipelining, setIsPipelining] = useState(false);
   const [isCycles, setIsCycles] = useState(false);
-  const [colorBlindMode, setColorBlindMode] = useState("none");
 
   const showCalculatorModal = useSelector(
     (state) => state.modals.calculatorModal
@@ -84,16 +78,6 @@ export const Header = () => {
     dispatch(updateNumericBase(selected));
   };
 
-  const handleColorBlindModeChange = () => {
-    const newMode = colorBlindMode === "none" ? "high-contrast" : "none";
-    setColorBlindMode(newMode);
-
-    document.body.classList.remove("color-blind-high-contrast");
-    if (newMode === "high-contrast") {
-      document.body.classList.add("color-blind-high-contrast");
-    }
-  };
-
   const handleCalculatorModal = () => {
     dispatch(setOpenCalculatorModal(!showCalculatorModal));
   };
@@ -119,17 +103,6 @@ export const Header = () => {
       )}
 
       <div className="row">
-        <TooltipWrapper>
-          <IconButton color="inherit" onClick={handleColorBlindModeChange}>
-            {colorBlindMode === "high-contrast" ? (
-              <Brightness7Icon />
-            ) : (
-              <Brightness5Icon />
-            )}
-          </IconButton>
-          <TooltipText>Contraste</TooltipText>
-        </TooltipWrapper>
-
         <HeaderSelect
           value={numericBase}
           onChange={(e) => handleNumericBaseSelectChange(e)}

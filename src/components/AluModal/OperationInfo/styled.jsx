@@ -23,30 +23,86 @@ export const Line = styled.div`
   width: 100%;
 `;
 
-export const TooltipText = styled.span`
-  visibility: hidden;
-  background-color: #333;
-  color: #fff;
+export const CustomButton = styled.button`
+  border: none;
   text-align: center;
-  border-radius: 5px;
-  padding: 5px 10px;
-  position: absolute;
-  z-index: 11;
-  bottom: 100%;
-  left: 50%;
   font-size: 14px;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  transition: opacity 0.1s ease-in-out;
+  font-weight: 600;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: ${(props) =>
+    props.$lightColor ? "var(--im-primary)" : "var(--im-lightgray)"};
+  background-color: ${(props) =>
+    props.$lightColor ? "var(--im-lightgray)" : "var(--im-primary)"};
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: all 0.1s;
 
-  &::after {
-    content: "";
+  &:hover {
+    background-color: var(--im-terciary);
+    color: var(--im-lightgray);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  &:disabled {
+    background-color: var(--im-gray);
+    cursor: not-allowed;
+  }
+`;
+
+export const DescriptionTooltip = styled.span`
+  position: relative;
+
+  &:before {
+    content: "Descripción";
+    font-size: 15px;
+    font-weight: lighter;
     position: absolute;
-    top: 100%;
-    left: 50%;
+    bottom: -39px;
     transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: #333 transparent transparent transparent;
+    left: 0%;
+    margin-left: 15px;
+    opacity: 80%;
+    width: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #333;
+    text-align: center;
+    display: none;
+  }
+
+  &:hover:before {
+    display: block;
+  }
+`;
+
+export const OperationTooltip = styled.span`
+  position: relative;
+
+  &:before {
+    content: "Operación";
+    font-size: 15px;
+    font-weight: lighter;
+    position: absolute;
+    bottom: -35px;
+    transform: translateX(-50%);
+    left: 0%;
+    margin-left: 22px;
+    opacity: 80%;
+    width: 100px;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: #333;
+    text-align: center;
+    display: none;
+  }
+
+  &:hover:before {
+    display: block;
   }
 `;

@@ -22,8 +22,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoClose, IoArrowForward } from "react-icons/io5";
 import { setOpenAluZoom } from "../../slices/modalsSlice";
 import { Button } from "../Button";
-import { toBinaryComplement } from "../../interpreter/utils.js";
+import { toBinaryComplement, toHexa } from "../../interpreter/utils.js";
 import OperationInfo from "./OperationInfo/index.jsx";
+
+export const HELP_SLIDE = -1;
 
 export const AluModal = () => {
   const dispatch = useDispatch();
@@ -33,8 +35,13 @@ export const AluModal = () => {
     (state) => state.application.execute.aluOperation
   );
 
-  const result = (aluOperation?.result ?? 0).toString().padStart(8, "0");
-  const firstEightBits = result.slice(0, 8);
+  const result =
+    typeof aluOperation?.result === "boolean"
+      ? aluOperation.result
+      : (aluOperation?.result ?? 0).toString().padStart(8, "0");
+
+  const firstEightBits =
+    typeof result === "boolean" ? result : result.slice(0, 8);
 
   const registerSbits = toBinaryComplement(aluOperation?.registerS ?? "0");
 
@@ -52,6 +59,14 @@ export const AluModal = () => {
     setCurrentSlide((prevSlide) => prevSlide - 1);
   };
 
+  const toHelpSlide = () => {
+    setCurrentSlide(HELP_SLIDE);
+  };
+
+  const toInitialSlide = () => {
+    setCurrentSlide(0);
+  };
+
   useEffect(() => {
     setShowResult(false);
     setCurrentSlide(0);
@@ -65,11 +80,19 @@ export const AluModal = () => {
             <StartBusContainer>
               <Bus>
                 Registro S:
-                <CircledNumber>{aluOperation.registerSIndex}</CircledNumber>
+                <CircledNumber>
+                  {aluOperation.registerSIndex == null
+                    ? aluOperation.registerSIndex
+                    : toHexa(aluOperation.registerSIndex)}
+                </CircledNumber>
               </Bus>
               <Bus>
                 Registro T:
-                <CircledNumber>{aluOperation.registerTIndex}</CircledNumber>
+                <CircledNumber>
+                  {aluOperation.registerTIndex == null
+                    ? aluOperation.registerTIndex
+                    : toHexa(aluOperation.registerTIndex)}
+                </CircledNumber>
               </Bus>
             </StartBusContainer>
 
@@ -84,8 +107,10 @@ export const AluModal = () => {
                       currentSlide={currentSlide}
                       prevSlide={prevSlide}
                       nextSlide={nextSlide}
+                      toHelpSlide={toHelpSlide}
+                      toInitialSlide={toInitialSlide}
                     />
-                  )  : (
+                  ) : (
                     <OperationInfo
                       aluOperationName={aluOperation.operation}
                       registerSbits={registerSbits}
@@ -103,7 +128,11 @@ export const AluModal = () => {
             <EndBusContainer>
               <Bus>
                 Registro R (destino):
-                <CircledNumber>{aluOperation.destinationIndex}</CircledNumber>
+                <CircledNumber>
+                  {aluOperation?.destinationIndex == null
+                    ? aluOperation?.destinationIndex
+                    : toHexa(aluOperation?.destinationIndex)}
+                </CircledNumber>
               </Bus>
             </EndBusContainer>
           </ModalContainer>

@@ -17,6 +17,7 @@ import {
   InitialSignBit,
   InitialMantissaBits,
   InitialExponentBits,
+  HelpRow,
 } from "./styled";
 import { Button } from "../../Button";
 import {
@@ -30,7 +31,10 @@ import {
   hasCarry,
 } from "../../../interpreter/instructions/FloatingPointSum";
 
+import { HELP_SLIDE } from "../index";
+
 import { IoArrowForward, IoArrowBack, IoArrowDown } from "react-icons/io5";
+import { FaQuestion } from "react-icons/fa";
 
 const initialSlide = 0;
 const lastSlide = 6;
@@ -45,6 +49,8 @@ export const FloatingPointSlides = ({
   currentSlide,
   prevSlide,
   nextSlide,
+  toHelpSlide,
+  toInitialSlide,
 }) => {
   let binaryToDecimalWithBias = (binaryStr) => {
     const decimalValue = parseInt(binaryStr, 2);
@@ -121,9 +127,8 @@ export const FloatingPointSlides = ({
     exponentBias,
     exponentBias
   );
-  const finalResult = floatingPointSum(registerSbits, registerTbits);
+  //const finalResult = floatingPointSum(registerSbits, registerTbits);
   //console.log(finalResult);
-
   return (
     <InfoContainer>
       <RowOperation>
@@ -135,14 +140,14 @@ export const FloatingPointSlides = ({
         {currentSlide === 0 && (
           <Slide>
             <Row>{"Interpretación de registros:"}</Row>
-            <InfoRow>
+            {/* <InfoRow>
               <Ball style={{ backgroundColor: "var(--im-lightgreen)" }} />
               <span> Signo |</span>
               <Ball style={{ backgroundColor: "var(--im-teal)" }} />
               <span> Exponente |</span>
               <Ball style={{ backgroundColor: "var(--im-lightblue)" }} />
               <span> Mantisa </span>
-            </InfoRow>
+            </InfoRow> */}
             <Row>
               {"S: "}
               {registerSbits}
@@ -409,19 +414,31 @@ export const FloatingPointSlides = ({
               {alignedRegisters.register2.exponent.decimal}
             </Row>
             <IoArrowDown></IoArrowDown>
-            <Row>
-              <BitsRow>
-                {"1."}
-                <MantissaBits>{normalizedMantissa.slice(2, 6)}</MantissaBits>
-              </BitsRow>
-              {"*2^"}
-              <ExponentBits>
-                {alignedRegisters.register2.exponent.decimal - placesMoved}
-              </ExponentBits>
-            </Row>
+            {sumResultMantissa === "0.0000" ? (
+              <Row>El resultado de la suma es 0.</Row>
+            ) : (
+              <Row>
+                <BitsRow>
+                  {"1."}
+                  <MantissaBits>{normalizedMantissa.slice(2, 6)}</MantissaBits>
+                </BitsRow>
+                {"*2^"}
+                <ExponentBits>
+                  {alignedRegisters.register2.exponent.decimal - placesMoved}
+                </ExponentBits>
+              </Row>
+            )}
+
             {isUnderflow && (
               <>
                 <Row>{"Underflow detectado"}</Row>
+              </>
+            )}
+
+            {sumResultMantissa === "0.0000" && (
+              <>
+                <IoArrowDown></IoArrowDown>
+                <Row>{resultSign + "0000000"}</Row>
               </>
             )}
           </Slide>
@@ -443,8 +460,7 @@ export const FloatingPointSlides = ({
                     {"*2^ "}
                     <ExponentBits>{resultExponentInt}</ExponentBits>
                   </Row>
-
-                  <IoArrowDown></IoArrowDown>
+                  <IoArrowDown />
                   <Row>
                     <BitsRow>
                       <SignBit>0</SignBit>
@@ -453,6 +469,18 @@ export const FloatingPointSlides = ({
                     </BitsRow>
                   </Row>
                   <Row>Resultado por consecuencia del underflow.</Row>
+                </>
+              ) : sumResultMantissa === "0.0000" ? (
+                <>
+                  <Row>{resultSign + "0000000"}</Row>
+                  <IoArrowDown />
+                  <Row>
+                    <BitsRow>
+                      <SignBit>{resultSign}</SignBit>
+                      <ExponentBits>000</ExponentBits>
+                      <MantissaBits>0000</MantissaBits>
+                    </BitsRow>
+                  </Row>
                 </>
               ) : (
                 <>
@@ -467,7 +495,7 @@ export const FloatingPointSlides = ({
                     {"*2^ "}
                     <ExponentBits>{resultExponentInt}</ExponentBits>
                   </Row>
-                  <IoArrowDown></IoArrowDown>
+                  <IoArrowDown />
                   <Row>
                     <BitsRow>
                       <SignBit>{resultSignStr}</SignBit>
@@ -479,7 +507,7 @@ export const FloatingPointSlides = ({
                     {"*2^ "}
                     <ExponentBits>{resultExponent}</ExponentBits>
                   </Row>
-                  <IoArrowDown></IoArrowDown>
+                  <IoArrowDown />
                   <Row>
                     <BitsRow>
                       <SignBit>{resultSign}</SignBit>
@@ -494,15 +522,36 @@ export const FloatingPointSlides = ({
             </>
           </Slide>
         )}
+        {currentSlide === HELP_SLIDE && (
+          <Slide>
+            <Row>Convención utilizada:</Row>
+            <br></br>
+
+            <HelpRow>• Signo: 1 bit (0 positivo, 1 negativo)</HelpRow>
+            <HelpRow>• Exponente: 3 bits con sesgo de 3</HelpRow>
+            <HelpRow>• Mantisa: 4 bits + 1 bit implícito</HelpRow>
+            <HelpRow>• Cero: Exponente y Mantisa = 0</HelpRow>
+          </Slide>
+        )}
       </SlidesContainer>
 
       <SlidesButtonsContainer>
-        {currentSlide != initialSlide && (
+        {currentSlide === 0 && (
+          <Button lightColor={true} onClick={toHelpSlide}>
+            <FaQuestion />
+          </Button>
+        )}
+        {currentSlide === HELP_SLIDE && (
+          <Button lightColor={true} onClick={toInitialSlide}>
+            <IoArrowBack />
+          </Button>
+        )}
+        {currentSlide != initialSlide && currentSlide != HELP_SLIDE && (
           <Button lightColor={true} onClick={prevSlide}>
             <IoArrowBack />
           </Button>
         )}
-        {currentSlide != lastSlide && (
+        {currentSlide != lastSlide && currentSlide != HELP_SLIDE && (
           <Button lightColor={true} onClick={nextSlide}>
             <IoArrowForward />
           </Button>

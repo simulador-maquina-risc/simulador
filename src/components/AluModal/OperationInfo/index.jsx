@@ -12,13 +12,12 @@ import {
   SlidesContainer,
   OperationDescription,
   SlidesButtonsContainer,
-  TooltipText,
+  CustomButton,
+  DescriptionTooltip,
+  OperationTooltip,
 } from "./styled";
 import { IoArrowBack } from "react-icons/io5";
 import { FaQuestion } from "react-icons/fa";
-import { FaTable } from "react-icons/fa";
-import { BsPlusSlashMinus } from "react-icons/bs";
-import { CiCalculator2 } from "react-icons/ci";
 import { AiFillCalculator } from "react-icons/ai";
 import { Button } from "../../Button";
 import {
@@ -175,35 +174,22 @@ const OperationInfo = ({
       <SlidesButtonsContainer>
         {currentSlide == firstSlide && (
           <>
-            <Button lightColor={true} onClick={setSecondSlide}>
-              <FaQuestion
-                onMouseEnter={(e) =>
-                  (e.currentTarget.nextSibling.style.visibility = "visible")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.nextSibling.style.visibility = "hidden")
-                }
-              />
-              <TooltipText>Descripción</TooltipText>
-            </Button>
-            <Button lightColor={true} onClick={setThirdSlide}>
-              <AiFillCalculator
-                size="25"
-                onMouseEnter={(e) =>
-                  (e.currentTarget.nextSibling.style.visibility = "visible")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.nextSibling.style.visibility = "hidden")
-                }
-              />
-              <TooltipText>Operación bit a bit</TooltipText>
-            </Button>
+            <DescriptionTooltip>
+              <CustomButton $lightColor={true} onClick={setSecondSlide}>
+                <FaQuestion />
+              </CustomButton>
+            </DescriptionTooltip>
+            <OperationTooltip>
+              <CustomButton $lightColor={true} onClick={setThirdSlide}>
+                <AiFillCalculator size="25" />
+              </CustomButton>
+            </OperationTooltip>
           </>
         )}
         {(currentSlide == secondSlide || currentSlide == thirdSlide) && (
-          <Button lightColor={true} onClick={setFirstSlide}>
+          <CustomButton $lightColor={true} onClick={setFirstSlide}>
             <IoArrowBack />
-          </Button>
+          </CustomButton>
         )}
       </SlidesButtonsContainer>
     </InfoContainer>

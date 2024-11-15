@@ -188,3 +188,12 @@ export const SlidesContainer = styled.div`
 `;
 
 export const Slide = styled.div``;
+
+export const HelpRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  gap: 10px;
+`;

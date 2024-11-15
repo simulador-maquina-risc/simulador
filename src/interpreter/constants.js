@@ -104,3 +104,6 @@ export const animationsAlu = [
 
 export const INVALID_END_ERROR =
   "La instrucción C000 debe ser la ultima en ser ejecutada.";
+
+export const INFINITE_LOOP_ERROR =
+  "El programa ha entrado en un bucle infinito.";
