@@ -147,10 +147,16 @@ export function toHexaPadStart(value) {
 }
 
 export function toBinary(value) {
+  if (value === null) {
+    return parseInt(0, 16).toString(2).padStart(8, "0");
+  }
   return parseInt(value, 16).toString(2).toUpperCase().padStart(8, "0");
 }
 
 export function toBinaryComplement(value) {
+  if (value === null) {
+    return parseInt(0, 16).toString(2).padStart(8, "0");
+  }
   if (parseInt(value, 16) >= 0) {
     return toBinary(value);
   } else {
@@ -169,7 +175,7 @@ export function toBinaryComplement(value) {
 }
 
 export function convertValue(value, base) {
-  if (value == null || value == "-" || value == "") {
+  if (value === null || value === "-" || value === "" || value === undefined) {
     return "-";
   }
   if (base == numericBaseType.HEXA) {

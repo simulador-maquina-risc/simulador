@@ -103,6 +103,8 @@ export function floatingPointSum(registerS, registerT) {
     }
   }
 
+  const mantissaZeroCheck = resultMantissa;
+
   const [normalizedMantissa, placesMoved] = normalizeMantissa(resultMantissa);
 
   const resultExponentInt =
@@ -121,7 +123,7 @@ export function floatingPointSum(registerS, registerT) {
     .split(".")[1]
     .substring(0, 4);
 
-  if (resultNormalizedMantissa === "0000") {
+  if (mantissaZeroCheck === "0.0000") {
     return resultSign + "0000000";
   }
 
@@ -145,11 +147,15 @@ Exponente sesgado:
 export function parseRegister(register) {
   const sign = parseInt(register[0], 2);
 
-  const exponentStr = register.slice(1, 4);
-  const exponentDecimal = parseInt(exponentStr, 2) - 3;
+  let exponentStr = register.slice(1, 4);
+  let exponentDecimal = parseInt(exponentStr, 2) - 3;
 
-  const mantissa = register.slice(4, 8);
-  const mantissaWithImpliedBit = `1.${mantissa}`;
+  let mantissa = register.slice(4, 8);
+  let mantissaWithImpliedBit = `1.${mantissa}`;
+
+  if (mantissa == "0000" && exponentStr == "000") {
+    mantissaWithImpliedBit = "0.0000";
+  }
 
   return {
     sign,

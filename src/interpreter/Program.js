@@ -179,9 +179,13 @@ export default class Program {
         instruction.resetCycle();
       }
     });
-
     const newState = actualInstruction.makeJump(oldState, this.typeSimulation);
-
+    if (
+      newState.execute.instructionId > this.instructions.length - 1 ||
+      newState.execute.instructionId % 1 !== 0
+    ) {
+      newState.execute.errorLine = idBranch;
+    }
     return newState;
   }
 }

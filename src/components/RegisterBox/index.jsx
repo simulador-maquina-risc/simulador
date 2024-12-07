@@ -29,7 +29,9 @@ export const RegisterBox = ({ id, data }) => {
         <RegistersContainer>
           {registersToShow.map((value, i) => (
             <RegisterContainer key={i}>
-              <RegisterNumeration>{i.toString(16).toUpperCase()}</RegisterNumeration>
+              <RegisterNumeration>
+                {i.toString(16).toUpperCase()}
+              </RegisterNumeration>
               <RegisterValue>{value}</RegisterValue>
             </RegisterContainer>
           ))}

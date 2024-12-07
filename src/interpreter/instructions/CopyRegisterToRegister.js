@@ -24,7 +24,12 @@ export default class CopyRegisterToRegister extends Instruction {
     newExecuteState.registers[this.destinationRegister] = value;
     newExecuteState.instructionId = this.id + 1;
     newExecuteState.edgeAnimation = [
-      { id: registersControlUnitId, reverse: true },
+      {
+        id: registersControlUnitId,
+        reverse: true,
+        data: value,
+        address: this.destinationRegister,
+      },
     ];
     return { ...oldState, execute: newExecuteState };
   }

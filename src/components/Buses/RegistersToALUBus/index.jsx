@@ -37,11 +37,21 @@ export const RegistersToALUBus = ({ id, data }) => {
   }, [animations, registerAluBottomId]);
 
   const animationDataTopToShow = useMemo(() => {
-    return convertValue(animationDataTop?.data, numericBase);
+    const value = convertValue(animationDataTop?.data, numericBase);
+    if (value === "-") {
+      return convertValue(0, numericBase);
+    } else {
+      return value;
+    }
   }, [animationDataTop, numericBase]);
 
   const animationDataBottomToShow = useMemo(() => {
-    return convertValue(animationDataBottom?.data, numericBase);
+    const value = convertValue(animationDataBottom?.data, numericBase);
+    if (value === "-") {
+      return convertValue(0, numericBase);
+    } else {
+      return value;
+    }
   }, [animationDataBottom, numericBase]);
 
   const edgeAnimationAluTop = !!animationDataTop;

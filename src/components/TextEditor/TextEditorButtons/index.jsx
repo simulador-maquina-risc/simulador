@@ -4,6 +4,7 @@ import { FaBackward, FaForward } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 import { splitCode } from "../../../interpreter/main";
+import { toHexaPadStart } from "../../../interpreter/utils";
 import {
   goToPreviousState,
   updatePreviousState,
@@ -76,6 +77,7 @@ export const TextEditorButtons = ({ text }) => {
       },
       execute: {
         ...applicationState.execute,
+        errorLine: null,
         mainMemoryCells: memory,
       },
     });
@@ -120,6 +122,18 @@ export const TextEditorButtons = ({ text }) => {
         applicationState,
         applicationState.execute.jumpInstruction
       );
+      if (newState.execute.errorLine) {
+        dispatch(clearApplication());
+        dispatch(setErrorLine(newState.execute.errorLine));
+        dispatch(setIsSimulating(false));
+        dispatch(
+          setError(
+            "No se encontró en el programa la dirección: " +
+              toHexaPadStart(newState.execute.instructionId * 2)
+          )
+        );
+        return;
+      }
       dispatch(updatePreviousState());
       dispatch(updateCurrentState(program.getNewState(newState)));
       return;
@@ -150,6 +164,18 @@ export const TextEditorButtons = ({ text }) => {
           oldState,
           oldState.execute.jumpInstruction
         );
+        if (newStateBranch.execute.errorLine) {
+          dispatch(clearApplication());
+          dispatch(setErrorLine(newStateBranch.execute.errorLine));
+          dispatch(setIsSimulating(false));
+          dispatch(
+            setError(
+              "No se encontró en el programa la dirección: " +
+                toHexaPadStart(newStateBranch.execute.instructionId * 2)
+            )
+          );
+          break;
+        }
         const nextState = program.getNewState(newStateBranch);
         oldState = nextState;
         dispatch(updatePreviousState());
